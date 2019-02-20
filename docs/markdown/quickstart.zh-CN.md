@@ -19,7 +19,7 @@
 > npm i -g vue-cli
 > mkdir my-project && cd my-project
 > vue init webpack
-> npm i && npm i element-ui
+> npm i && npm i miview
 ```
 
 ## 标准开发

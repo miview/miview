@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Main from './main.vue'
+import Main from './main'
 
 // let LoadingBarConstructor = Vue.extend(Main)
 
