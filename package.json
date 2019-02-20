@@ -27,7 +27,7 @@
   "author": "ly2011",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/iview/iview/issues"
+    "url": "https://github.com/miview/miview/issues"
   },
   "scripts": {
     "bootstrap": "yarn || npm i",

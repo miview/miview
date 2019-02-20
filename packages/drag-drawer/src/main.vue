@@ -53,7 +53,7 @@
 
 <script>
 import Drawer from '../../drawer'
-import DragDrawerTrigger from './drag-drawer-trigger.vue'
+import DragDrawerTrigger from './drag-drawer-trigger'
 import RenderDom from '../../utils/render-dom'
 import Mixin from '../mixin'
 export default {
