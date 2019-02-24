@@ -99,14 +99,14 @@ export default {
 </script>
 <div class="demo-block">
   <mi-search-form
-    :formConfig="formConfig"
+    :form-config="formConfig"
     :value="form"
   >
     <template slot="date">
       <el-input v-model="form.operateColumn" />
     </template>
-    <template slot="formItem" style="display: none;">
-      <el-form-item label="自定义label">
+    <template slot="formItem">
+      <el-form-item label="自定义label" style="display: none;">
         <el-select v-model="form.mySelected" placeholder="请选择">
           <el-option v-for="item in myOptions" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
@@ -121,19 +121,11 @@ export default {
 <template>
   <div class="search-form-example">
     <mi-search-form
-      :formConfig="formConfig"
+      :form-config="formConfig"
       :value="form"
     >
       <template slot="date">
         <el-input v-model="form.operateColumn" />
-      </template>
-      <template slot="formItem" style="display: none;">
-        <el-form-item label="自定义label">
-          <el-select v-model="form.mySelected" placeholder="请选择">
-            <el-option v-for="item in myOptions" :key="item.value" :label="item.label" :value="item.value">
-            </el-option>
-          </el-select>
-        </el-form-item>
       </template>
     </mi-search-form>
   </div>
