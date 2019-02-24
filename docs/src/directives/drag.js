@@ -90,7 +90,7 @@ Vue.directive('dialogDrag', {
 Vue.directive('dialogDragWidth', {
   bind (el, binding, vnode, oldVnode) {
     const dragDom = binding.value.$el.querySelector('.el-dialog')
-    console.log(dragDom)
+    // console.log(dragDom)
     el.onmousedown = e => {
       // 鼠标按下，计算当前元素距离可视区的距离
       const disX = e.clientX - el.offsetLeft

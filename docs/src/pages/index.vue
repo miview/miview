@@ -27,7 +27,7 @@ export default {
   },
   computed: {
     base () {
-      return `/${this.$vantLang}`;
+      return `/${this.$miviewLang}`;
     }
   }
 }

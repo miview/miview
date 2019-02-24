@@ -94,12 +94,12 @@ import navConf from '../doc.config.js'
 export default {
   data () {
     return {
-      data: navConf[this.$vantLang].nav
+      data: navConf[this.$miviewLang].nav
     }
   },
   computed: {
     base () {
-      return `/${this.$vantLang}`;
+      return `/${this.$miviewLang}`;
     }
   }
 }

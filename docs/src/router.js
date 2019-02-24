@@ -12,7 +12,7 @@ const registerRoute = isDemo => {
   const route = [
     {
       path: '*',
-      redirect: () => `/${Vue.prototype.$vantLang}/`
+      redirect: () => `/${Vue.prototype.$miviewLang}/`
     }
   ]
 

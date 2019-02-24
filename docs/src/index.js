@@ -14,7 +14,7 @@ Vue.component('demo-block', demoBlock)
 Vue.use(VueRouter)
 
 let lang = 'zh-CN'
-Vue.prototype.$vantLang = lang
+Vue.prototype.$miviewLang = lang
 
 const router = new VueRouter({
   mode: 'hash',
@@ -25,7 +25,7 @@ router.beforeEach((route, redirect, next) => {
   //   location.replace('mobile.html' + location.hash);
   // }
   // progress.start()
-  console.log('title: ', route.meta)
+  // console.log('title: ', route.meta)
   document.title = route.meta.title || document.title
   next()
 })

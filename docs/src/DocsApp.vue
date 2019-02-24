@@ -1,14 +1,5 @@
 <template>
   <div class="app">
-    <!-- <van-doc
-      :base="base"
-      :config="config"
-      active="Vue 组件"
-      :simulators="simulators"
-      :current-simulator="currentSimulator"
-    > -->
-    <!-- <router-view /> -->
-    <!-- </van-doc> -->
     <div class="main">
       <mainHeader></mainHeader>
       <div
@@ -50,10 +41,10 @@ export default {
   },
   computed: {
     base () {
-      return `/${this.$vantLang}`;
+      return `/${this.$miviewLang}`;
     },
     config () {
-      return docConfig[this.$vantLang];
+      return docConfig[this.$miviewLang];
     },
     currentSimulator () {
       const { name } = this.$route;
@@ -62,7 +53,7 @@ export default {
   },
   watch: {
     $route () {
-      // console.log('routeName: ', this.$route.name);
+      // console.log('routeNamiviewLanghis.$route.name);
       this.isIndex = this.$route.name === 'index'
     }
   },
