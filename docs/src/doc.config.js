@@ -70,7 +70,8 @@ module.exports = {
             list: [
               { path: '/paste-select', title: 'PasteSelect 复制粘贴器' },
               { path: '/select', title: 'Select 选择器' },
-              { path: '/language-input', title: 'LanguageInput 多语言' }
+              { path: '/language-input', title: 'LanguageInput 多语言' },
+              { path: '/search-form', title: 'SearchForm' }
             ]
           },
           {

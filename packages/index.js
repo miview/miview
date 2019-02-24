@@ -8,6 +8,7 @@ import IndexScss from './index.scss';
 import LanguageInput from './language-input';
 import LoadingBar from './loading-bar';
 import PasteSelect from './paste-select';
+import SearchForm from './search-form';
 import Select from './select';
 import SelectArea from './select-area';
 import SimpleImgPreview from './simple-img-preview';
@@ -26,6 +27,7 @@ const components = [
   LanguageInput,
   LoadingBar,
   PasteSelect,
+  SearchForm,
   Select,
   SelectArea,
   SimpleImgPreview,
@@ -55,6 +57,7 @@ export {
   LanguageInput,
   LoadingBar,
   PasteSelect,
+  SearchForm,
   Select,
   SelectArea,
   SimpleImgPreview,
