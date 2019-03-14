@@ -20,12 +20,12 @@ Vue.use(Table)
   <div class="table">
     <mi-table
       :table-data="tableData"
-      :table-key="tableKey"
+      :table-header="tableHeader"
       :is-expand="false"
       :is-expand-one="false"
       :is-index="true"
       :is-select="true"
-      :fixed-height="500"
+      :fixed-height="300"
     >
       <template
         slot="date"
@@ -79,10 +79,26 @@ export default {
         name: '王小虎',
         address: '上海市普陀区金沙江路 1516 弄'
       }],
-      tableKey: [
-        { name: '日期', value: 'date', operate: true },
-        { name: '姓名', value: 'name', operate: true },
-        { name: '地址', value: 'address', operate: false, renderHeader: this.renderHeader }
+      tableHeader: [
+        { label: '日期', prop: 'date', slots: 'date' }, // slots方式渲染
+        {
+          label: '姓名', prop: 'name', render: (h, params) => { // render方式渲染
+            return <el-popover
+                placement="top"
+                trigger="hover"
+              >
+                <p>姓名：{params.row.name}</p>
+                <p>住址：{params.row.address}</p>
+                <div
+                  slot="reference"
+                  class="name-wrapper"
+                >
+                  <el-tag size="medium">{params.row.name}</el-tag>
+                </div>
+              </el-popover>
+          }
+        },
+        { label: '地址', prop: 'address', renderHeader: this.renderHeader } // 普通方式渲染
       ]
     }
   },
@@ -112,16 +128,16 @@ export default {
 
 :::demo
 ```html
-<template>
+<div class="demo-back-top demo-block">
   <div class="table">
     <mi-table
       :table-data="tableData"
-      :table-key="tableKey"
+      :table-header="tableHeader"
       :is-expand="false"
       :is-expand-one="false"
       :is-index="true"
       :is-select="true"
-      :fixed-height="500"
+      :fixed-height="300"
     >
       <template
         slot="date"
@@ -149,8 +165,8 @@ export default {
         </el-popover>
       </template>
     </mi-table>
-	</div>
-</template>
+  </div>
+</div>
 
 <script>
 import moment from 'moment'
@@ -175,10 +191,26 @@ export default {
         name: '王小虎',
         address: '上海市普陀区金沙江路 1516 弄'
       }],
-      tableKey: [
-        { name: '日期', value: 'date', operate: true },
-        { name: '姓名', value: 'name', operate: true },
-        { name: '地址', value: 'address', operate: false, renderHeader: this.renderHeader }
+      tableHeader: [
+        { label: '日期', prop: 'date', slots: 'date' }, // slots方式渲染
+        {
+          label: '姓名', prop: 'name', render: (h, params) => { // render方式渲染
+            return <el-popover
+                placement="top"
+                trigger="hover"
+              >
+                <p>姓名：{params.row.name}</p>
+                <p>住址：{params.row.address}</p>
+                <div
+                  slot="reference"
+                  class="name-wrapper"
+                >
+                  <el-tag size="medium">{params.row.name}</el-tag>
+                </div>
+              </el-popover>
+          }
+        },
+        { label: '地址', prop: 'address', renderHeader: this.renderHeader } // 普通方式渲染
       ]
     }
   },
@@ -206,7 +238,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 	.table {
 		.table-msg {
 			margin-left: 5px;
@@ -224,21 +256,20 @@ export default {
 参数 | 说明 | 类型 | 可选值 | 默认值
 --- | --- | --- | --- | --- |
 table-data | 表格数据列表 | Array | - | []
-table-key | 表格对应名称和关键字 | Array | - | []
-is-expand | 是否显示展开行 | Boolean | - | false
-is-expand-one | 展开行是否只显示一行 | Boolean | - | false
+table-header | 表格对应名称和关键字(表头数据) | Array | - | []
 is-select | 是否显示勾选框 | Boolean | - | false
 is-index | 是否显示索引列 | Boolean | - | false
 fixed-height | 固定高度 | Number/String | - | -
 pagination | 表格分页信息 | Object | - | -
 
-### table-key API参数
+### table-header API参数
 
 参数 | 说明 | 类型 | 可选值 | 默认值
 --- | --- | --- | --- | --- |
-operate | 是否使用template模板 | Boolean | - | -
-name | 对应列的标题(label) | String | - | -
-value | 对应列的字段名(prop) | String | - | -
+slots | 使用template模板(slot)渲染, slot的名称 | String | - | -
+render | 使用渲染函数(render)渲染 | Functiom(h, params) | - | -
+label | 对应列的标题(label) | String | - | -
+prop | 对应列的字段名(prop) | String | - | -
 width | 对应列的宽度 | String | - | -
 min-width | 对应列的最小宽度 | String | - | -
 fixed | 是否固定列 | String/Boolean | true/left/right | -
@@ -258,7 +289,7 @@ layout | 组件布局，子组件名用逗号分隔 | String | - | total, sizes,
 <div style="display: none;">
 @param:
 	tableData: 表格数据列表
-	tableKey: 表格对应名称和关键字
+	tableHeader: 表格对应名称和关键字
 	isExpand: 是否显示展开行(true or false)
 	isExpandOne: 展开行是否只显示一行(true of false)
 	isSelect: 是否显示勾选框(true or false)
@@ -266,9 +297,8 @@ layout | 组件布局，子组件名用逗号分隔 | String | - | total, sizes,
 	fixed-height: 固定高度
 	pagination: 表格分页信息
 	@sub param
-		operate: 是否使用template模板(true or false)
-		name: 对应列名
-		value: 对应列的关键字
+		prop: 对应列名
+		label: 对应列的关键字
 		width: 宽度
 		minWidth: 最小宽度
 		fixed: 是否固定列(left or right)
