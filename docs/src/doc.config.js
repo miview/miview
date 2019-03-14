@@ -35,10 +35,6 @@ module.exports = {
                 path: '/quickstart',
                 title: '快速上手'
               },
-              // {
-              //   path: '/demo',
-              //   title: '示例页面'
-              // },
               {
                 name: 'index',
                 path: '/',
@@ -97,10 +93,6 @@ module.exports = {
               {
                 path: '/drawer',
                 title: 'Drawer 抽屉'
-              },
-              {
-                path: '/drag-drawer',
-                title: 'DragDrawer 可拖拽抽屉'
               }
             ]
           },
@@ -113,15 +105,6 @@ module.exports = {
               }
             ]
           }
-          // {
-          //   groupName: '业务组件',
-          //   list: [
-          //     {
-          //       path: '/select-area',
-          //       title: 'SelectArea 省市区选择器'
-          //     }
-          //   ]
-          // }
         ]
       }
     ]

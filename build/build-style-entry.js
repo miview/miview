@@ -81,7 +81,7 @@ function getStyleRelativePath (component, style, ext) {
 }
 
 function checkComponentHasStyle (component) {
-  console.log('checkComponentHasStyle: ', component, getStylePath(component), fs.existsSync(getStylePath(component)))
+  // console.log('checkComponentHasStyle: ', component, getStylePath(component), fs.existsSync(getStylePath(component)))
 
   return fs.existsSync(getStylePath(component))
 }
