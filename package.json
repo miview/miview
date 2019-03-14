@@ -32,7 +32,6 @@
   "scripts": {
     "bootstrap": "yarn || npm i",
     "dev": "npm-run-all --parallel build:entry dev:site",
-    "dev:example": "webpack-dev-server --config build/webpack.dev.js",
     "dev:site": "webpack-dev-server --config build/webpack.doc.js",
     "lint": "eslint ./packages --ext .js,.vue && stylelint \"packages/*.css\"",
     "build:entry": "node build/build-entry.js",
@@ -46,8 +45,6 @@
     "release": "sh build/release.sh"
   },
   "dependencies": {
-    "@babel/runtime": "^7.3.0",
-    "area-data": "^5.0.6",
     "element-ui": "^2.4.11"
   },
   "devDependencies": {
@@ -58,6 +55,7 @@
     "@babel/plugin-transform-runtime": "^7.1.0",
     "@babel/polyfill": "^7.2.5",
     "@babel/preset-env": "^7.1.6",
+    "@babel/runtime": "^7.3.4",
     "@commitlint/cli": "^7.2.1",
     "@commitlint/config-conventional": "^7.1.2",
     "@vant/compiler": "^1.0.0",
@@ -107,7 +105,6 @@
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
     "postcss-preset-env": "^6.4.0",
-    "postcss-pxtorem": "^4.0.1",
     "prettier": "^1.15.2",
     "progress-bar-webpack-plugin": "^1.11.0",
     "rimraf": "^2.6.2",
@@ -123,15 +120,14 @@
     "vue-template-compiler": "^2.5.17",
     "vue-template-es2015-compiler": "^1.8.1",
     "vuedraggable": "^2.16.0",
-    "vuex": "^3.1.0",
     "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10",
     "webpack-merge": "^4.1.4"
   },
   "peerDependencies": {
-    "vue": ">= 2.5.0",
-    "element-ui": ">= 2.3.9"
+    "element-ui": ">= 2.3.9",
+    "vue": ">= 2.5.0"
   },
   "husky": {
     "hooks": {
