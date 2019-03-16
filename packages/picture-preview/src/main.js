@@ -185,7 +185,7 @@ export default {
     const { draggable, mask } = this
     let el = mask ? this.$refs.root : this.$refs.container
 
-    if (el && el.$parent.$el === document.body) {
+    if (el && el.parentNode === document.body) {
       document.body.removeChild(el)
     }
 

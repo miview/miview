@@ -100,7 +100,7 @@ module.exports = {
               },
               {
                 path: '/picture-preview',
-                title: 'PicturePreview'
+                title: 'PicturePreview 图片查看器'
               }
             ]
           },
