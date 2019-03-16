@@ -3,10 +3,12 @@
 import BackTop from './back-top';
 import Dialog from './dialog';
 import Drawer from './drawer';
+import Ellipsis from './ellipsis';
 import IndexScss from './index.scss';
 import LanguageInput from './language-input';
 import LoadingBar from './loading-bar';
 import PasteSelect from './paste-select';
+import PicturePreview from './picture-preview';
 import SearchForm from './search-form';
 import Select from './select';
 import SimpleImgPreview from './simple-img-preview';
@@ -19,10 +21,12 @@ const components = [
   BackTop,
   Dialog,
   Drawer,
+  Ellipsis,
   IndexScss,
   LanguageInput,
   LoadingBar,
   PasteSelect,
+  PicturePreview,
   SearchForm,
   Select,
   SimpleImgPreview,
@@ -46,10 +50,12 @@ export {
   BackTop,
   Dialog,
   Drawer,
+  Ellipsis,
   IndexScss,
   LanguageInput,
   LoadingBar,
   PasteSelect,
+  PicturePreview,
   SearchForm,
   Select,
   SimpleImgPreview,

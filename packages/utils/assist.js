@@ -1,8 +1,27 @@
+/* eslint-disable */
 import Vue from 'vue'
+
 const isServer = Vue.prototype.$isServer
+const SPECIAL_CHARS_REGEXP = /([\:\-\_]+(.))/g
+const MOZ_HACK_REGEXP = /^moz([A-Z])/
+// eslint-disable-next-line
+const ieVersion = isServer ? 0 : Number(document.documentMode)
+
+/* istanbul ignore next */
+const trim = function(string) {
+  return (string || '').replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, '')
+}
+/* istanbul ignore next */
+const camelCase = function(name) {
+  return name
+    .replace(SPECIAL_CHARS_REGEXP, function(_, separator, letter, offset) {
+      return offset ? letter.toUpperCase() : letter
+    })
+    .replace(MOZ_HACK_REGEXP, 'Moz$1')
+}
 
 // 判断参数是否是其中之一
-export function oneOf (value, validList = []) {
+export function oneOf(value, validList = []) {
   for (let i = 0; i < validList.length; i++) {
     if (value === validList[i]) {
       return true
@@ -10,10 +29,67 @@ export function oneOf (value, validList = []) {
   }
   return false
 }
+/**
+ * 全屏
+ * @param  {[type]} element [需要全屏展示的元素]
+ * @return {[type]}         [description]
+ */
+export const fullscreen = function(element) {
+  let func =
+    element.requestFullscreen ||
+    element.msRequestFullscreen ||
+    element.mozRequestFullScreen ||
+    element.webkitRequestFullScreen
+
+  if (Object.prototype.toString.call(func) == '[object Function]') {
+    func.call(element)
+  }
+}
+
+/**
+ * 退出全屏
+ * @return {[type]} [description]
+ */
+export const exitfullscreen = function() {
+  if (document.exitFullscreen) {
+    document.exitFullscreen()
+  } else if (document.msExitFullscreen) {
+    document.msExitFullscreen()
+  } else if (document.mozCancelFullScreen) {
+    document.mozCancelFullScreen()
+  } else if (document.webkitExitFullscreen) {
+    document.webkitExitFullscreen()
+  }
+}
+
+/**
+ * 监听全屏变化事件
+ * @param {[type]}   element [要监听全屏变化的元素]
+ * @param {Function} fn      [回调函数]
+ */
+export const addFullscreenchangeEvent = function(element, fn) {
+  element.addEventListener('fullscreenchange', fn)
+  element.addEventListener('mozfullscreenchange', fn)
+  element.addEventListener('webkitfullscreenchange', fn)
+  element.addEventListener('msfullscreenchange', fn)
+}
+
+/**
+ * 检查是否处于全屏状态
+ * @return {[Boolean]} [description]
+ */
+export const checkFullscreen = function() {
+  return !!(
+    document.fullscreenEnabled ||
+    window.fullScreen ||
+    document.webkitIsFullScreen ||
+    document.msFullscreenEnabled
+  )
+}
 
 // For Modal scrollBar hidden
 let cached
-export function getScrollBarSize (fresh) {
+export function getScrollBarSize(fresh) {
   if (isServer) return 0
   if (fresh || cached === undefined) {
     const inner = document.createElement('div')
@@ -57,14 +133,14 @@ export const MutationObserver = isServer
   : window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver || false
 
 // getStyle
-export function getStyle (element, styleName) {
+export function getStyle(element, styleName) {
   if (!element || !styleName) return null
   styleName = camelCase(styleName)
   if (styleName === 'float') {
     styleName = 'cssFloat'
   }
   try {
-    const computed = document.defaultView.getComputedStyle(element, '')
+    const computed = document.defaultView.getComputedStyle(elet, '')
     return element.style[styleName] || computed ? computed[styleName] : null
   } catch (e) {
     return element.style[styleName]
@@ -72,20 +148,20 @@ export function getStyle (element, styleName) {
 }
 
 // scrollTop animation
-export function scrollTop (el, from = 0, to, duration = 500, endCallback) {
+export function scrollTop(el, from = 0, to, duration = 500, endCallback) {
   if (!window.requestAnimationFrame) {
     window.requestAnimationFrame =
       window.webkitRequestAnimationFrame ||
       window.mozRequestAnimationFrame ||
       window.msRequestAnimationFrame ||
-      function (callback) {
+      function(callback) {
         return window.setTimeout(callback, 1000 / 60)
       }
   }
   const difference = Math.abs(from - to)
   const step = Math.ceil((difference / duration) * 50)
 
-  function scroll (start, end, step) {
+  function scroll(start, end, step) {
     if (start === end) {
       endCallback && endCallback()
       return
@@ -107,7 +183,7 @@ export function scrollTop (el, from = 0, to, duration = 500, endCallback) {
 }
 
 // Find components upward(向上查找组件)
-function findComponentUpward (context, componentName, componentNames) {
+function findComponentUpward(context, componentName, componentNames) {
   if (typeof componentName === 'string') {
     componentNames = [componentName]
   } else {
@@ -125,7 +201,7 @@ function findComponentUpward (context, componentName, componentNames) {
 export { findComponentUpward }
 
 // Find component downward(向下查找组件)
-export function findComponentDownward (context, componentName) {
+export function findComponentDownward(context, componentName) {
   const childrens = context.$children
   let children = null
 
@@ -145,7 +221,7 @@ export function findComponentDownward (context, componentName) {
 }
 
 // Find components downward
-export function findComponentsDownward (context, componentName) {
+export function findComponentsDownward(context, componentName) {
   return context.$children.reduce((components, child) => {
     if (child.$options.name === componentName) components.push(child)
     const foundChilds = findComponentsDownward(child, componentName)
@@ -154,7 +230,7 @@ export function findComponentsDownward (context, componentName) {
 }
 
 // Find components upward
-export function findComponentsUpward (context, componentName) {
+export function findComponentsUpward(context, componentName) {
   let parents = []
   const parent = context.$parent
   if (parent) {
@@ -166,7 +242,7 @@ export function findComponentsUpward (context, componentName) {
 }
 
 // Find brothers components
-export function findBrothersComponents (context, componentName, exceptMe = true) {
+export function findBrothersComponents(context, componentName, exceptMe = true) {
   let res = context.$parent.$children.filter(item => {
     return item.$options.name === componentName
   })
@@ -174,3 +250,5 @@ export function findBrothersComponents (context, componentName, exceptMe = true)
   if (exceptMe) res.splice(index, 1)
   return res
 }
+
+/* eslint-enable */

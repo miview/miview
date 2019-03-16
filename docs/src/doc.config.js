@@ -93,6 +93,14 @@ module.exports = {
               {
                 path: '/drawer',
                 title: 'Drawer 抽屉'
+              },
+              {
+                path: '/ellipsis',
+                title: 'Ellipsis 文本自动省略号'
+              },
+              {
+                path: '/picture-preview',
+                title: 'PicturePreview'
               }
             ]
           },
