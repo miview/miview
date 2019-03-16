@@ -102,9 +102,9 @@ $picture-preview-prefix-cls: #{$css-prefix}picturepreview;
     margin-left: 20px;
     @extend .iconDir;
 
-    // &:before {
-    //   transform: rotate(180deg);
-    // }
+    &:before {
+      transform: rotate(180deg);
+    }
   }
 
   .next {

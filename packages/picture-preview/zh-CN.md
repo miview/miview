@@ -1,5 +1,7 @@
 ## PicturePreview 图片查看器
 
+> draggable 暂时存在bug,暂不开放该属性
+
 ### 代码示例
 
 <script>
@@ -40,5 +42,5 @@ export default {
       </div>
     </div>
   </div>
-  <mi-picture-preview :activeIndex="activeIndex" :source="source" :toolbar="true" :visible="visible" :onClose="handleClose" :draggable="true"></mi-picture-preview>
+  <mi-picture-preview :activeIndex="activeIndex" :source="source" :toolbar="true" :visible="visible" :onClose="handleClose" :draggable="false"></mi-picture-preview>
 </div>

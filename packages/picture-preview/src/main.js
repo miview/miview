@@ -259,8 +259,8 @@ export default {
         // 从全屏退出到非全屏时，认为是没有显示过，让图片居中显示
         this.shown = false
 
-        this.setContainerStyle()
         this.$nextTick(() => {
+          this.setContainerStyle()
           this.shown = true
         })
       } else {
@@ -277,7 +277,8 @@ export default {
         // this.setContainerStyle()
 
         this.$nextTick(() => {
-          console.log('handleFullChange - img: ', this.image, this.image.ratio)
+          // console.log('handleFullChange - img: ', this.image, this.image.ratio)
+          this.setContainerStyle()
           this.handleZoom(this.image.ratio)
         })
       }
@@ -381,7 +382,7 @@ export default {
       )
     },
     isOne2One () {
-      return Math.round(this.state.image.ratio * 100) === 100
+      return Math.round(this.image.ratio * 100) === 100
     },
     handleClose (e) {
       console.log('handleClose...')
@@ -400,18 +401,18 @@ export default {
       e.preventDefault()
       this.current = this.current <= 0 ? this.imgs.length - 1 : this.current - 1
       this.shown = true
-      // this.$nextTick(() => {
-      this.setContainerStyle()
-      // })
+      this.$nextTick(() => {
+        this.setContainerStyle()
+      })
     },
     handleNext (e) {
       console.log('handleNext...')
       e.preventDefault()
       this.current = this.current >= this.imgs.length - 1 ? 0 : this.current + 1
       this.shown = true
-      // this.$nextTick(() => {
-      this.setContainerStyle()
-      // })
+      this.$nextTick(() => {
+        this.setContainerStyle()
+      })
     },
     /**
      * 设置容器的样式，用于切换图片时，根据图片大小，确定容器的尺寸以及位置
@@ -507,18 +508,21 @@ export default {
 
     let closeBtnClass = {
       close: !isFullscreen,
-      'el-icon-close': true,
+      iconfont: true,
+      'miviewpicture-close': true,
       'close-fullscreen': isFullscreen
     }
     let isHide = !(source.length > 1 || !!this.$slots.default)
     let leftBtnClass = {
       prev: true,
-      'el-icon-arrow-left': true,
+      iconfont: true,
+      'miviewarrow-line-Bold': true,
       [`${prefixCls}-hide`]: isHide
     }
     let rightBtnClass = {
       next: true,
-      'el-icon-arrow-right': true,
+      iconfont: true,
+      'miviewarrow-line-Bold': true,
       [`${prefixCls}-hide`]: isHide
     }
     let toolbarClass = {
@@ -528,21 +532,25 @@ export default {
     /* eslint-disable */
     let one2oneClass = {
       icon: true,
+      iconfont: true,
+      'miviewpicture-equal': true,
       'icon-disabled': image.ratio === 1
     }
     /* eslint-enable */
 
     let zoomInClass = {
       icon: true,
-      'el-icon-zoom-in': true,
+      iconfont: true,
+      'miviewpicture-enlarge': true,
       'icon-disabled': image.ratio >= MAX_RATIO
     }
     let zoomOutClass = {
       icon: true,
-      'el-icon-zoom-out': true,
+      iconfont: true,
+      'miviewpicture-micrify': true,
       'icon-disabled': image.ratio <= MIN_RATIO
     }
-    let screenStatus = isFullscreen ? 'el-icon-remove-outline' : 'el-icon-circle-plus-outline'
+    let screenStatus = isFullscreen ? 'miviewpicture-shrink' : 'miviewpicture-fullscreen'
     let rootClass = {
       [`${prefixCls}-root`]: mask,
       [`${prefixCls}-hide`]: !show
@@ -564,7 +572,7 @@ export default {
         ref="container"
         onDragStart={this.handleDragStart}
         onDragstart={this.handleDragStart}
-        onMousedown={draggable ? this.handleMouseDown : null}
+        onMousedown={draggable ? this.handleMouseDown : () => {}}
       >
         <div class="canvas">
           {imgs.map((item, index) => {
@@ -593,11 +601,12 @@ export default {
             {current + 1}/{imgs.length}
           </div>
           <div class="toolbarCon">
-            <i class={`icon ${screenStatus}`} onClick={this.handleSwitchFull} />
+            <i class={one2oneClass} onClick={() => this.handleZoom(1)} />
+            <i class={`icon iconfont ${screenStatus}`} onClick={this.handleSwitchFull} />
             <i class={zoomInClass} onClick={() => this.handleZoom(image.ratio + STEP_RATIO)} />
             <i class={zoomOutClass} onClick={() => this.handleZoom(image.ratio - STEP_RATIO)} />
-            <i class="icon el-icon-refresh" onClick={this.handleRotate} />
-            <i class="icon el-icon-download" />
+            <i class="icon iconfont miviewpicture-rotate" onClick={this.handleRotate} />
+            <i class="icon iconfont miviewpicture-download" />
           </div>
         </div>
       </div>
