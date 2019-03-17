@@ -26,3 +26,8 @@
 1. [mu-ui](https://github.com/mu-ui/mu-ui)
 2. [VV-UI](https://github.com/VV-UI/VV-UI)
 3. [vant](https://github.com/youzan/vant)
+
+## Bug
+
+1. element-ui@2.6.1上 LanguageInput 多语言组件在弹出框内输入内容，导致数据没法监听
+2. element-ui@2.6.1/vue2.6上 TreeSelect 树选择器在多选上没法弹出(暂不确定是vue还是element 高版本引起的)

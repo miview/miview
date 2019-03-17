@@ -9,37 +9,14 @@
       placement="bottom-end"
       popper-class="language-input-popover"
     >
-      <el-form
-        ref="formLanguage"
-        @submit.native.prevent
-      >
-        <el-form-item
-          v-for="(item, index) in languageContent"
-          :key="index"
-          :label="showLabel ? item.languageType : null"
-        >
-          <el-input
-            v-model.trim="item[params.field]"
-            :maxlength="maxlength"
-            :placeholder="item.placeholder"
-          ></el-input>
+      <el-form ref="formLanguage" @submit.native.prevent>
+        <el-form-item v-for="(item, index) in languageContent" :key="index" :label="showLabel ? item.languageType : null">
+          <el-input v-model.trim="item[params.field]" @input="handlePopoverInputChange" :maxlength="maxlength" :placeholder="item.placeholder"></el-input>
         </el-form-item>
       </el-form>
-      <div
-        class="dialog-footer"
-        style="text-align: right;"
-      >
-        <el-button
-          @click="handleCancel"
-          :size="selectSize"
-          :disabled="disabled"
-        >取 消</el-button>
-        <el-button
-          type="primary"
-          @click="dialogEnter"
-          :size="selectSize"
-          :disabled="disabled"
-        >确 定</el-button>
+      <div class="dialog-footer" style="text-align: right;">
+        <el-button @click="handleCancel" :size="selectSize" :disabled="disabled">取 消</el-button>
+        <el-button type="primary" @click="dialogEnter" :size="selectSize" :disabled="disabled">确 定</el-button>
       </div>
     </el-popover>
 
@@ -117,7 +94,7 @@ export default {
       default: '0'
     },
     inputPlaceholder: { // input框的占位符
-      type: String,
+      type: String
     },
     size: {
       type: String,
@@ -239,6 +216,9 @@ export default {
       })
       this.update(this.languageContent)
       this.dialogVisible = false
+    },
+    handlePopoverInputChange (val) {
+      console.log('handlePopoverInputChange: ', val)
     }
   }
 };
