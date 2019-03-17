@@ -16,7 +16,7 @@ import SvgIcon from './svg-icon';
 import Table from './table';
 import Transfer from './transfer';
 import TreeSelect from './tree-select';
-const version = '0.2.23';
+const version = '0.2.24';
 const components = [
   BackTop,
   Dialog,
