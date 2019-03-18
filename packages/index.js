@@ -1,6 +1,7 @@
 /* eslint-disable */
 // This file is auto gererated by build/build-entry.js
 import BackTop from './back-top';
+import Cropper from './cropper';
 import Dialog from './dialog';
 import Drawer from './drawer';
 import Ellipsis from './ellipsis';
@@ -19,6 +20,7 @@ import TreeSelect from './tree-select';
 const version = '0.2.24';
 const components = [
   BackTop,
+  Cropper,
   Dialog,
   Drawer,
   Ellipsis,
@@ -48,6 +50,7 @@ export {
   install,
   version,
   BackTop,
+  Cropper,
   Dialog,
   Drawer,
   Ellipsis,

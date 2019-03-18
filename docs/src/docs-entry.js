@@ -5,6 +5,7 @@ export default {
   'intro.zh-CN': () => import('../markdown/intro.zh-CN.md'),
   'quickstart.zh-CN': () => import('../markdown/quickstart.zh-CN.md'),
   'back-top.zh-CN': () => import('../../packages/back-top/zh-CN.md'),
+  'cropper.zh-CN': () => import('../../packages/cropper/zh-CN.md'),
   'dialog.zh-CN': () => import('../../packages/dialog/zh-CN.md'),
   'drawer.zh-CN': () => import('../../packages/drawer/zh-CN.md'),
   'ellipsis.zh-CN': () => import('../../packages/ellipsis/zh-CN.md'),

@@ -87,6 +87,14 @@ module.exports = {
                 title: 'SimpleImgPreview 图片预览'
               },
               {
+                path: '/picture-preview',
+                title: 'PicturePreview 图片查看器'
+              },
+              {
+                path: '/cropper',
+                title: 'Cropper 图片裁剪器'
+              },
+              {
                 path: '/table',
                 title: 'Table 表格'
               },
@@ -97,10 +105,6 @@ module.exports = {
               {
                 path: '/ellipsis',
                 title: 'Ellipsis 文本自动省略号'
-              },
-              {
-                path: '/picture-preview',
-                title: 'PicturePreview 图片查看器'
               }
             ]
           },

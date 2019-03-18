@@ -16,6 +16,8 @@ Vue.use(VueRouter)
 let lang = 'zh-CN'
 Vue.prototype.$miviewLang = lang
 
+console.log('Vue version: ', Vue.version)
+
 const router = new VueRouter({
   mode: 'hash',
   routes: routes()

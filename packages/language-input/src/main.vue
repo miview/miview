@@ -108,14 +108,22 @@ export default {
         [this.params.field]: ''
       },
       dialogVisible: false, // 控制弹框是否展开
-      inputWidth: this.width
+      inputWidth: this.width,
+      languageContent: []
     };
   },
+  watch: {
+    content: {
+      immediate: true,
+      handler (val) {
+        this.languageContent = deepClone(val) // 复制父级组件的主题列表
+      }
+    }
+  },
   computed: {
-    languageContent () { // 复制父级组件的主题列表
-      console.log('111111');
-      return deepClone(this.content)
-    },
+    // languageContent () { // 复制父级组件的主题列表
+    //   return deepClone(this.content)
+    // },
     showLabel () { // 是否展示label
       return !!this.labelWidth && this.labelWidth !== '0'
     },
