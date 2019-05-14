@@ -29,22 +29,55 @@
         :key="index"
         align="center"
         :type="col.type"
-        :prop="col.value"
-        :label="col.name"
+        :prop="col.prop"
+        :label="col.label"
         :width="col.width"
         :min-width="col.minWidth"
-        :fixed="col.isFixed"
+        :fixed="col.fixed"
         :sortable="col.sortable"
         :render-header="col.renderHeader"
         show-overflow-tooltip
       >
         <template slot-scope="scope">
           <!-- slot渲染 -->
-          <slot v-if="col.slots" :name="col.slots" :$index="scope.$index" :row="scope.row"></slot>
+          <slot v-if="col.slotName" :name="col.slotName" :$index="scope.$index" :row="scope.row" :prop="col.prop" :label="col.label"></slot>
           <!-- render函数渲染 -->
           <table-column-plus v-else-if="col.render" :render="col.render" :row="scope.row" :index="index" :column="col"></table-column-plus>
           <!-- 普通渲染 -->
           <span v-else>{{scope.row[col.prop]}}</span>
+        </template>
+
+        <template v-if="col.children && col.children.length">
+          <el-table-column
+            v-for="(child, j) in col.children"
+            :key="`child${index+j+1}`"
+            align="center"
+            :type="child.type"
+            :prop="child.prop"
+            :label="child.label"
+            :width="child.width"
+            :min-width="child.minWidth"
+            :fixed="child.fixed"
+            :sortable="child.sortable"
+            :render-header="child.renderHeader"
+            show-overflow-tooltip
+          >
+            <template slot-scope="childScope">
+              <!-- slot渲染 -->
+              <slot
+                v-if="child.slotName"
+                :name="child.slotName"
+                :$index="childScope.$index"
+                :row="childScope.row"
+                :prop="child.prop"
+                :label="child.label"
+              ></slot>
+              <!-- render函数渲染 -->
+              <table-column-plus v-else-if="child.render" :render="child.render" :row="childScope.row" :index="j" :column="child"></table-column-plus>
+              <!-- 普通渲染 -->
+              <span v-else>{{childScope.row[child.prop]}}</span>
+            </template>
+          </el-table-column>
         </template>
       </el-table-column>
     </el-table>
