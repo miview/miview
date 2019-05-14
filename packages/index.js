@@ -17,7 +17,7 @@ import SvgIcon from './svg-icon';
 import Table from './table';
 import Transfer from './transfer';
 import TreeSelect from './tree-select';
-const version = '0.2.25';
+const version = '0.3.0';
 const components = [
   BackTop,
   Cropper,
