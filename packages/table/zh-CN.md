@@ -181,7 +181,7 @@ export default {
           children: [
             { label: '省份', prop: 'province', width: '120' },
             { label: '市区', prop: 'city', width: '120' },
-            { label: '地址', prop: 'address', width: '120' },
+            { label: '地址', prop: 'address', width: '120', slotName: 'location' },
             { label: '邮编', prop: 'zip', width: '120' }
           ]
         } // 普通方式渲染
@@ -386,6 +386,14 @@ export default {
           </div>
         </el-popover>
       </template>
+      <!-- 二级表头数据 -->
+      <template
+        slot="location"
+        slot-scope="scope"
+      >
+        <i class="el-icon-location"></i>
+        <span style="margin-left: 10px;">{{scope.row.address}}</span>
+      </template>
     </mi-table>
   </div>
 </div>
@@ -427,6 +435,14 @@ export default {
             <el-tag size="medium">{{scope.row.name}}</el-tag>
           </div>
         </el-popover>
+      </template>
+      <!-- 二级表头数据 -->
+      <template
+        slot="location"
+        slot-scope="scope"
+      >
+        <i class="el-icon-location"></i>
+        <span style="margin-left: 10px;">{{scope.row.address}}</span>
       </template>
     </mi-table>
   </div>
@@ -511,7 +527,7 @@ export default {
           children: [
             { label: '省份', prop: 'province', width: '120' },
             { label: '市区', prop: 'city', width: '120' },
-            { label: '地址', prop: 'address', width: '120' },
+            { label: '地址', prop: 'address', width: '120', slotName: 'location' },
             { label: '邮编', prop: 'zip', width: '120' }
           ]
         } // 普通方式渲染
